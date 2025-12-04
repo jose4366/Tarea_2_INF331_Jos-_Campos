@@ -197,7 +197,7 @@ class EstacionamientoTest {
 
 
         int listaLargoAbiertos = 3;
-        int listaLargoCerrados = 1;
+        int listaLargoCerrados = 2;
 
         //When
 
@@ -225,9 +225,5 @@ class EstacionamientoTest {
         //Then
 
         assertEquals(totalRecaudado,resultado);
-    }
-
-    @Test
-    void getTicket() {
     }
 }

@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id 'application' // Necesario para ejecutar la app por consola
+    id 'jacoco'
 }
 
 group = 'org.example'
@@ -18,4 +20,33 @@ dependencies {
 
 test {
     useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+        exceptionFormat "full"
+    }
+
+    finalizedBy jacocoTestReport
+}
+
+application {
+    // Reemplaza esto con la ruta REAL a tu clase Main (paquete.NombreClase)
+    mainClass = 'org.example.Main'
+}
+
+run {
+    // 1. SOLUCIÓN AL CRASH: Conecta la consola de Gradle con tu teclado
+    standardInput = System.in
+
+    // 2. SOLUCIÓN A LOS CARACTERES RAROS: Fuerza UTF-8 en la consola
+    systemProperty "file.encoding", "UTF-8"
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        html.required = true
+        xml.required = false
+        csv.required = false
+    }
 }
