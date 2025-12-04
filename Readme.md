@@ -1,8 +1,8 @@
-# Calculadora de Tarifas de Estacionamiento 🚗
+# Calculadora de Tarifas de Estacionamiento 
 
 Sistema de gestión de cobros de estacionamiento por consola (CLI) desarrollado en Java 21. El proyecto implementa lógica de negocio para tarifas diferenciadas por vehículo, cobro por tramos de 30 minutos, topes diarios y descuentos de fin de semana.
 
-## 📋 Descripción del Diseño
+## Descripción del Diseño
 
 El diseño sigue una arquitectura orientada a objetos (POO) limpia, separando las entidades de dominio, la lógica de negocio y la interfaz de usuario. con la arquitectura msc
 
@@ -91,3 +91,8 @@ En caso de los otros se probaron la logica de los modelos y service, esta dio un
 En caso de los resultados del model esto se debe a que no se probo funciones como toString, get y set, ya que estas son triviales y no considere importante a la hora de probar.
 
 En base a lo mencionado, el programa tiene una gran cobertura de test en las partes importantes del programa lo que ayuda a que hayan menor cantidad de bugs.
+
+
+# Test Images
+![Test de salida](docs/test1.png)
+![Reporte de Cobertura JaCoCo](docs/testCoverage.png)
