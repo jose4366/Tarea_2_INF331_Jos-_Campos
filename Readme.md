@@ -36,41 +36,85 @@ con esto en la siguiente ruta queda la cobertura de los test en la siguiente rut
 
 ```mermaid
 classDiagram
+    %% Definición de Paquetes
+    namespace Model {
+        class TipoVehiculo
+        class Vehiculo
+        class Ticket
+    }
+    namespace Service {
+        class Estacionamiento
+    }
+
+    %% Definición de la Enumeración TipoVehiculo
     class TipoVehiculo {
-        <<Enumeration>>
+        <<enumeration>>
         AUTO
         MOTO
         CAMIONETA
-        +getTarifa()
+        -int tarifa
+        +getTarifa() int
     }
 
-    class Ticket {
-        -String idTicket
+    %% Definición de la Clase Vehiculo
+    class Vehiculo {
+        -TipoVehiculo tipoVehiculo
         -String patente
-        -LocalDateTime fechaEntrada
-        -LocalDateTime fechaSalida
-        -EstadoTicket estado
-        +calcularDuracionMinutos()
+        +Vehiculo(TipoVehiculo tipoVehiculo, String patente)
+        +getTipoVehiculo() TipoVehiculo
+        +getPatente() String
+        +equals(Object o) boolean
+        +hashCode() int
     }
 
-    class CalculadoraTarifas {
-        -double TOPE_DIARIO
-        +calcularMonto(Ticket ticket, TipoVehiculo tipo)
-        -aplicarDescuentoFinDeSemana(double monto, LocalDateTime fecha)
+    %% Definición de la Clase Ticket
+    class Ticket {
+        -int idTicket
+        -Vehiculo vehiculo
+        -LocalDateTime fechaHoraEntrada
+        -LocalDateTime fechaHoraSalida
+        -String estado
+        -int montoCobrado
+        +Ticket(int idTicket, Vehiculo vehiculo, LocalDateTime fechaHoraEntrada)
+        +ValidarFechaYMontoPlausible(int montoCobrado, LocalDateTime fechaHoraSalida) boolean
+        +CerrrarTicket(int montoCobrado, LocalDateTime fechaHoraSalida) void
+        +getIdTicket() int
+        +getVehiculo() Vehiculo
+        +getFechaHoraSalida() LocalDateTime
+        +getFechaHoraEntrada() LocalDateTime
+        +getEstado() String
+        +getMontoCobrado() int
     }
 
-    class RepositorioTickets {
-        -List<Ticket> baseDeDatosMemoria
-        +guardar(Ticket t)
-        +buscarPorId(String id)
-        +listarAbiertos()
-        +listarCerrados()
+    %% Definición de la Clase Service Estacionamiento
+    class Estacionamiento {
+        -List~Ticket~ listaDeTickets
+        -int tope
+        -float descuentoFinde
+        +Estacionamiento(int tope, float descuentoFinde)
+        +RegistrarVehiculo(int idTicket, String patente, TipoVehiculo tipoVehiculo, LocalDateTime fechaEntrada) void
+        +RegistrarSalidaVehiculo(int idTicket, LocalDateTime horaCierreTicket) void
+        +CalcularMontoTotalPagar(Ticket ticket, LocalDateTime horaCierreTicket) int
+        +getListaDeTickets(boolean isCerrado) List~Ticket~
+        +totalRecaudado(LocalDateTime fechaFinal) int
+        +getTicket(int idTicket) Ticket
     }
 
-    Ticket --> TipoVehiculo
-    RepositorioTickets o-- Ticket
-    CalculadoraTarifas ..> Ticket : usa
+    %% Relaciones
 
+    %% Un Vehiculo tiene un TipoVehiculo asociado
+    Vehiculo --> "1" TipoVehiculo : tiene un >
+
+    %% Un Ticket tiene un Vehiculo asociado
+    Ticket --> "1" Vehiculo : asociado a >
+
+    %% Estacionamiento contiene una lista de Tickets (Agregación)
+    Estacionamiento o-- "*" Ticket : contiene >
+
+    %% Dependencias del Servicio (Usa estas clases en parámetros o lógica interna)
+    Estacionamiento ..> Vehiculo : usa
+    Estacionamiento ..> TipoVehiculo : usa
+    Estacionamiento ..> Ticket : usa
 ```
 
 ## Consideraciones
