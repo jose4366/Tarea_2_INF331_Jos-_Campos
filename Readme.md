@@ -121,6 +121,7 @@ classDiagram
 
 Actualmente se considera un tope de 15000, aunque hayan pasado mas de un dia. Si por ejemplo esta desde el 01/12/2025 a 04/12/2025 se considera como tope 15000, no se considera un tope por dia sino por ticket.
 
+
 ## Cobertura
 
 Se medio la cobertura y resulta en:
@@ -133,6 +134,10 @@ Para los test unitarios no se considero realizar en main, puesto que esta como p
 En caso de los otros se probaron la logica de los modelos y service, esta dio una cobertura muy buena para los servicios para branches o sentencia.
 
 En caso de los resultados del model esto se debe a que no se probo funciones como toString, get y set, ya que estas son triviales y no considere importante a la hora de probar.
+
+## Licencia
+
+![Licencia](licencia.md)
 
 En base a lo mencionado, el programa tiene una gran cobertura de test en las partes importantes del programa lo que ayuda a que hayan menor cantidad de bugs.
 
