@@ -135,13 +135,13 @@ En caso de los otros se probaron la logica de los modelos y service, esta dio un
 
 En caso de los resultados del model esto se debe a que no se probo funciones como toString, get y set, ya que estas son triviales y no considere importante a la hora de probar.
 
-## Licencia
-
-![Licencia](licencia.md)
-
 En base a lo mencionado, el programa tiene una gran cobertura de test en las partes importantes del programa lo que ayuda a que hayan menor cantidad de bugs.
 
 
 # Test Images
 ![Test de salida](docs/test1.png)
 ![Reporte de Cobertura JaCoCo](docs/testCoverage.png)
+
+## Licencia
+
+![Licencia](LICENSE)
