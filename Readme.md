@@ -32,6 +32,8 @@ con esto en la siguiente ruta queda la cobertura de los test en la siguiente rut
 ```
 ./build/report/jacoco/test/html/index.html
 ```
+
+Esto fue Probado en PowerShell, no se asegura que funcionen estos comandos en otra terminal.
 ### Diagrama de Clases (UML)
 
 ```mermaid
